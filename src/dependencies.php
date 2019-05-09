@@ -21,4 +21,5 @@ return function (App $app) {
     };
 
     $container['ToDosController'] = new \ToDos\Factories\ToDosControllerFactory();
+	$container['AddToDoController'] = new \ToDos\Factories\AddToDoControllerFactory();
 };
