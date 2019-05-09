@@ -8,5 +8,15 @@
 <body>
 <h1>Add ToDo</h1>
 
+<form action="/addTodo" method="post">
+	<input type="text" name="task" placeholder="Add Task"><br>
+	<input type="radio" name="priority" value="1"> High<br>
+	<input type="radio" name="priority" value="2"> Medium<br>
+	<input type="radio" name="priority" value="3"> Low<br>
+
+	<input type="submit" value="Submit">
+
+</form>
+
 </body>
 </html>
