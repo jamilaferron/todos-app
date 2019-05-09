@@ -7,5 +7,7 @@ use Slim\Http\Response;
 return function (App $app) {
     $container = $app->getContainer();
 
-    $app->get('/[{name}]', );
+    $app->get('/', );
+	$app->get('/addTask', );
+	$app->post('/addTask', );
 };
