@@ -10,6 +10,7 @@ class AddToDoControllerFactory
 	function __invoke(ContainerInterface $container)
 	{
 		$renderer = $container->get('renderer');
-		return new AddToDoController($renderer);
+		$toDosModel = $container->get('ToDosModel');
+		return new AddToDoController($renderer, $toDosModel);
 	}
 }
