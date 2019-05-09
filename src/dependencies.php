@@ -19,4 +19,6 @@ return function (App $app) {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
     };
+
+    $container['ToDosController'] = new \ToDos\Factories\ToDosControllerFactory();
 };
