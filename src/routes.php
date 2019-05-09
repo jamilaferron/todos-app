@@ -10,4 +10,6 @@ return function (App $app) {
     $app->get('/', 'ToDosController');
 	$app->get('/addToDo', 'AddToDoController');
 	$app->post('/addToDo', 'AddToDoController');
+	$app->post('/completeToDo', 'CompleteToDoController');
+	$app->post('/deleteToDo', 'DeleteToDoController');
 };

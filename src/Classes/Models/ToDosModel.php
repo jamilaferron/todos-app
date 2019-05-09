@@ -12,7 +12,7 @@
 
 	public function getToDos() : array
 	{
-		$query = $this->db->prepare("SELECT `id`, `task`, `priority` FROM `todos_table`");
+		$query = $this->db->prepare("SELECT `id`, `task`, `priority`,`completed` FROM `todos_table`");
 		$query->execute();
 		return $query->fetchAll();
 	}
@@ -23,4 +23,16 @@
 		return $query->execute(['task'=>$task, 'priority'=>$priority]);
 
 	}
+
+	public function completeToDo(int $id) : bool
+	{
+		$query = $this->db->prepare("UPDATE `todos_table` SET `completed` = 1 WHERE `id` = :id;");
+		return $query->execute(['id'=>$id]);
+	}
+
+	 public function deleteToDo(int $id) : bool
+	 {
+		 $query = $this->db->prepare("DELETE FROM `todos_table` WHERE `id` = :id;");
+		 return $query->execute(['id'=>$id]);
+	 }
  }

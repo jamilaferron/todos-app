@@ -6,7 +6,44 @@
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<h1>Index</h1>
+<h1>Add New Task</h1>
 
+<form action="/addToDo" method="post">
+	<input type="text" name="task" placeholder="Add Task"><br>
+	<input type="radio" name="priority" value="1"> High<br>
+	<input type="radio" name="priority" value="2"> Medium<br>
+	<input type="radio" name="priority" value="3"> Low<br>
+
+	<input type="submit" value="Submit">
+
+</form>
+
+<h3>Tasks</h3>
+<?php
+foreach ($toDos as $toDo)
+{
+	if($toDo['completed'] == 0)
+	{
+		echo $toDo['task'] . '<form action="/completeToDo" method="post">
+			 <input type="hidden" name="id" value="'.$toDo['id'].'">
+			 <input type="submit" name="completed" value="Done">
+		  </form>
+		  <form action="/deleteToDo" method="post">
+			 <input type="hidden" name="id" value="'.$toDo['id'].'">
+			 <input type="submit" name="delete" value="Delete">
+		  </form>';
+	}
+}
+?>
+<h3>Completed Tasks</h3>
+<?php
+foreach ($toDos as $toDo)
+{
+	if($toDo['completed'] == 1)
+	{
+		echo '<strike>' . $toDo['task'] . '</strike><br>';
+	}
+}
+?>
 </body>
 </html>

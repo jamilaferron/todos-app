@@ -30,6 +30,8 @@ return function (App $app) {
 
     $container['ToDosController'] = new \ToDos\Factories\ToDosControllerFactory();
 	$container['AddToDoController'] = new \ToDos\Factories\AddToDoControllerFactory();
+	$container['CompleteToDoController'] = new \ToDos\Factories\CompleteToDoControllerFactory();
+	$container['DeleteToDoController'] = new \ToDos\Factories\DeleteToDoControllerFactory();
 	$container['ToDosModel'] = new \ToDos\Factories\ToDosModelFactory();
 
 };
