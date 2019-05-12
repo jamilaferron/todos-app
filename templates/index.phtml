@@ -57,10 +57,6 @@
         document.getElementById("addList_submit").click();
     });
 
-    document.getElementById("completeTask-input").addEventListener("focusout", function(){
-        document.getElementById("completeTask_submit").click();
-    });
-
     var inputs = document.querySelectorAll(".editTask-input");
     var info_btns = document.querySelectorAll(".editInfo");
 
@@ -68,6 +64,16 @@
         let current = info_btns[j].getAttribute('id');
         inputs[j].addEventListener("focusin", function () {
 	        document.getElementById(current).classList.remove("d-none");
+        });
+    }
+
+    var completeInputs = document.querySelectorAll(".completeTask-input");
+    var complete_btns = document.querySelectorAll(".completeTask_submit");
+    for (var c = 0; c < completeInputs.length; c++) {
+        let current = complete_btns[c].getAttribute('id');
+
+        completeInputs[c].addEventListener("focusout", function () {
+            document.getElementById(current).click();
         });
     }
 

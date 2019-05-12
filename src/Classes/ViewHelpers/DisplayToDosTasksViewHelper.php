@@ -47,9 +47,9 @@ class DisplayToDosTasksViewHelper
 			$result .= '<div class="row w-100 ml-0 mt-2">
 				<div class="col-1 pb-2">
 					<form action="/completeToDo" method="post">
-						<input type="checkbox" id="completeTask-input">
+						<input type="checkbox" class="completeTask-input" id="completeTask' . $task['id'] . '-input">
 						<input type="hidden" name="id" value="' . $task['id'] . '">
-						<input type="submit" value="Submit" id="completeTask_submit" class="d-none">
+						<input type="submit" value="Submit" id="completeTask' . $task['id'] . '_submit" class=" completeTask_submit d-none">
 					</form>
 				</div>
 				<div class="col-11 border-bottom border-secondary pb-2 pl-0 d-flex justify-content-between "><div>';
@@ -227,7 +227,7 @@ class DisplayToDosTasksViewHelper
 									<form action="/addToDo" method="post">
 										<input type="text" id="addTask-input" name="task" class="bg-transparent border-0">
 										<input type="hidden" value="0" name="priority">
-										<input type="hidden" value="'.$list['id'].'" name="listId">
+										<input type="hidden" value="'.$list['id'].'" name="list">
 										<input type="submit" value="Submit" id="addTask_submit" class="d-none">
 									</form>
 								</div>
