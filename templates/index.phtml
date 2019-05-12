@@ -16,8 +16,8 @@
 <div class="container-fluid">
 	<div class="row h-100">
 		<div class="col-3 bg-light">
-			<div class="mt-5" id="list-container">
-				<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDoLists($toDosLists);?>
+			<div id="list-container">
+				<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDoLists($id['id'], $toDosLists);?>
 				<div class="row d-flex align-items-center pl-3">
 					<form action="/addToDoList" method="post">
 						<input id="addList-input" class="bg-transparent border-0" type="text" name="list_name">
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="col-9">
-			<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDosList($toDosLists[1],$toDosTasks);?>
+			<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDosList($id,$toDosTasks);?>
 		</div>
 	</div>
 </div>
@@ -82,7 +82,19 @@
             }
             this.className += " active";
             var id = this.getAttribute('id');
-			console.log(id);
+        });
+    }
+
+    var activeInputs = document.querySelectorAll(".activeList-input");
+
+    var active_btns = document.querySelectorAll(".activeList");
+
+    for (var b = 0; b < activeInputs.length; b++) {
+        let current = active_btns[b].getAttribute('id');
+
+        activeInputs[b].addEventListener("focusin", function () {
+            console.log(current);
+            document.getElementById(current).click();
         });
     }
 </script>

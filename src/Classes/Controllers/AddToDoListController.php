@@ -19,9 +19,10 @@ class AddToDoListController
 		$data = $request->getParsedBody();
 		if ($data['list_name'] === "")
 		{
-			return $response->withRedirect('/');
+			return $response->withRedirect('/',);
 		}else {
 			$this->toDosListsModel->addToDoList($data['list_name']);
+
 			return $response->withRedirect('/');
 		}
 	}

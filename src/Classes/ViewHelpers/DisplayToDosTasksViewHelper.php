@@ -4,17 +4,35 @@ namespace ToDos\ViewHelpers;
 class DisplayToDosTasksViewHelper
 {
 
-	static public function displayToDoLists($toDosLists)
+	static public function displayToDoLists($id, $toDosLists)
 	{
 		$result = '';
 		foreach ($toDosLists as $list)
 		{
-			$id = $list['id'] - 1;
-			$result .= '<div class="row list-name d-flex align-items-center pl-3">
+			if ($list['id'] == $id) {
+				$result .= '<div class="row list-name d-flex align-items-center pl-3 active">
 							<form action="">
-								<input type="text" class="bg-transparent border-0" value="'.$list['list_name'].'">
+								<input type="text" class="bg-transparent border-0 activeList-input" id="activeList'.$list['id'].'" value="'.$list['list_name'].'">
+							</form>
+							<form action="/" method="post" class="d-none">
+								<input type="hidden" class="bg-transparent border-0" name="listId" value="'.$list['id'].'">
+								<input type="submit" value="Submit" id="activeList'.$list['id'].'_submit" class="activeList d-none">
 							</form>
 						</div>';
+			} else {
+				$result .= '<div class="row list-name d-flex align-items-center pl-3">
+							<form action="">
+								<input type="text" class="bg-transparent border-0 activeList-input" id="activeList'.$list['id'].'" value="'.$list['list_name'].'">
+							</form>
+							<form action="/" method="post" class="d-none">
+								<input type="hidden" class="bg-transparent border-0" name="listId" value="'.$list['id'].'">
+								<input type="submit" value="Submit" id="activeList'.$list['id'].'_submit" class="activeList d-none">
+							</form>
+						</div>';
+			}
+
+
+
 		}
 		return ($result);
 	}
@@ -53,6 +71,7 @@ class DisplayToDosTasksViewHelper
 					$result .= '<form action="/editToDo" method="post" class="d-inline">
 						<input type="text" id="editTask-input'.$task['id'].'" class="bg-transparent border-0 editTask-input" name="task" value="' . $task['task'] .'">
 						<input type="hidden" value="'.$task['id'].'" name="id">
+						<input type="hidden" value="'.$task['id'].'" name="ListId">
 						<input type="submit" value="Submit" id="editTask_submit'.$task['id'].'" class="d-none">
 					</form>
 					</div>
@@ -208,7 +227,7 @@ class DisplayToDosTasksViewHelper
 									<form action="/addToDo" method="post">
 										<input type="text" id="addTask-input" name="task" class="bg-transparent border-0">
 										<input type="hidden" value="0" name="priority">
-										<input type="hidden" value="'.$list['id'].'" name="list">
+										<input type="hidden" value="'.$list['id'].'" name="listId">
 										<input type="submit" value="Submit" id="addTask_submit" class="d-none">
 									</form>
 								</div>

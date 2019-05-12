@@ -21,8 +21,19 @@ class ToDosController
 
 	function __invoke($request, $response, $args)
 	{
+		$data = $request->getParsedBody();
+
 		$args['toDosTasks'] = $this->toDosTasksModel->getToDosTasks();
 		$args['toDosLists'] = $this->toDosListsModel->getToDosLists();
+
+		if (isset($data['listId']))
+		{
+			$id = $data['listId'] - 1;
+			$args['id'] = $args['toDosLists'][$id];
+		}else{
+			$args['id'] = $args['toDosLists'][0];
+		}
+
 		$this->renderer->render($response, 'index.phtml', $args);
 	}
 }
