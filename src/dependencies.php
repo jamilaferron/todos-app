@@ -29,9 +29,11 @@ return function (App $app) {
 	};
 
     $container['ToDosController'] = new \ToDos\Factories\ToDosControllerFactory();
-	$container['AddToDoController'] = new \ToDos\Factories\AddToDoControllerFactory();
-	$container['CompleteToDoController'] = new \ToDos\Factories\CompleteToDoControllerFactory();
-	$container['DeleteToDoController'] = new \ToDos\Factories\DeleteToDoControllerFactory();
-	$container['ToDosModel'] = new \ToDos\Factories\ToDosModelFactory();
+	$container['AddToDoTaskController'] = new \ToDos\Factories\AddToDoTaskControllerFactory();
+	$container['AddToDoListController'] = new \ToDos\Factories\AddToDoListControllerFactory();
+	$container['ToDosTasksModel'] = new \ToDos\Factories\ToDosTasksModelFactory();
+	$container['ToDosListsModel'] = new \ToDos\Factories\ToDosListsModelFactory();
 
+	$container['CompleteToDoTaskController'] = new \ToDos\Factories\CompleteToDoTaskControllerFactory();
+	$container['DeleteToDoTaskController'] = new \ToDos\Factories\DeleteToDoTaskControllerFactory();
 };

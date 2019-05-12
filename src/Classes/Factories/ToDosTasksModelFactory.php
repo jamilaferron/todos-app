@@ -2,13 +2,13 @@
 namespace ToDos\Factories;
 
 use Psr\Container\ContainerInterface;
-use ToDos\Models\ToDosModel;
+use ToDos\Models\ToDosTasksModel;
 
-class ToDosModelFactory
+class ToDosTasksModelFactory
 {
 	function __invoke(ContainerInterface $container)
 	{
 		$db = $container->get('dbConnection');
-		return new ToDosModel($db);
+		return new ToDosTasksModel($db);
 	}
 }

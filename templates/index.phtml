@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Slim 3</title>
-    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<meta charset="utf-8"/>
+	<title>ToDo App</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<link rel="stylesheet" href="styles/styles.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" defer></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" defer></script>
 </head>
 <body>
-<h1>Add New Task</h1>
+<div class="container-fluid">
+	<div class="row h-100">
+		<div class="col-3 bg-light">
+			<div class="mt-5" id="list-container">
+				<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDoLists($toDosLists);?>
+				<div class="row d-flex align-items-center pl-3">
+					<form action="/addToDoList" method="post">
+						<input id="addList-input" class="bg-transparent border-0" type="text" name="list_name">
+						<input type="submit" value="Submit" id="addList_submit" class="d-none">
+					</form>
+				</div>
+				<div class="row fixed-bottom pl-4">
+					<div>
+						<button class="bg-transparent border-0" id="addList-button"><i class="fas fa-plus-circle pr-2"></i>Add List</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-9">
+			<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayToDosList($toDosLists[1],$toDosTasks);?>
+		</div>
+	</div>
+</div>
+<?php echo \ToDos\ViewHelpers\DisplayToDosTasksViewHelper::displayEditTaskModal($toDosLists, $toDosTasks);?>
 
-<form action="/addToDo" method="post">
-	<input type="text" name="task" placeholder="Add Task"><br>
-	<input type="radio" name="priority" value="1"> High<br>
-	<input type="radio" name="priority" value="2"> Medium<br>
-	<input type="radio" name="priority" value="3"> Low<br>
+<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+<script>
 
-	<input type="submit" value="Submit">
+    document.getElementById("addTask-button").addEventListener("click", function(){
+        document.getElementById("addTask-input").focus();
+    });
 
-</form>
+    document.getElementById("addTask-input").addEventListener("focusout", function(){
+        document.getElementById("addTask_submit").click();
+    });
 
-<h3>Tasks</h3>
-<?php
-foreach ($toDos as $toDo)
-{
-	if($toDo['completed'] == 0)
-	{
-		echo $toDo['task'] . '<form action="/completeToDo" method="post">
-			 <input type="hidden" name="id" value="'.$toDo['id'].'">
-			 <input type="submit" name="completed" value="Done">
-		  </form>
-		  <form action="/deleteToDo" method="post">
-			 <input type="hidden" name="id" value="'.$toDo['id'].'">
-			 <input type="submit" name="delete" value="Delete">
-		  </form>';
-	}
-}
-?>
-<h3>Completed Tasks</h3>
-<?php
-foreach ($toDos as $toDo)
-{
-	if($toDo['completed'] == 1)
-	{
-		echo '<strike>' . $toDo['task'] . '</strike><br>';
-	}
-}
-?>
+    document.getElementById("addList-button").addEventListener("click", function(){
+        document.getElementById("addList-input").focus();
+    });
+
+    document.getElementById("addList-input").addEventListener("focusout", function(){
+        document.getElementById("addList_submit").click();
+    });
+
+    document.getElementById("completeTask-input").addEventListener("focusout", function(){
+        document.getElementById("completeTask_submit").click();
+    });
+
+    var inputs = document.querySelectorAll(".editTask-input");
+    var info_btns = document.querySelectorAll(".editInfo");
+
+    for (var j = 0; j < inputs.length; j++) {
+        let current = info_btns[j].getAttribute('id');
+        inputs[j].addEventListener("focusin", function () {
+	        document.getElementById(current).classList.remove("d-none");
+        });
+    }
+
+    var lists = document.getElementById("list-container");
+    var btns = lists.getElementsByClassName("list-name");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].setAttribute('id', i);
+        btns[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0) {
+                current[0].className = current[0].className.replace(" active", "");
+            }
+            this.className += " active";
+            var id = this.getAttribute('id');
+			console.log(id);
+        });
+    }
+</script>
 </body>
 </html>

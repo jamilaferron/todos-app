@@ -3,22 +3,26 @@
 namespace ToDos\Controllers;
 
 use Slim\Views\PhpRenderer;
-use ToDos\Models\ToDosModel;
+use ToDos\Models\ToDosListsModel;
+use ToDos\Models\ToDosTasksModel;
 
 class ToDosController
 {
 	public $renderer;
-	public $toDosModel;
+	public $toDosTasksModel;
+	public $toDosListsModel;
 
-	public function __construct(PhpRenderer $renderer, ToDosModel $toDosModel)
+	public function __construct(PhpRenderer $renderer, ToDosTasksModel $toDosTasksModel, ToDosListsModel $toDosListsModel)
 	{
 		$this->renderer = $renderer;
-		$this->toDosModel = $toDosModel;
+		$this->toDosTasksModel = $toDosTasksModel;
+		$this->toDosListsModel = $toDosListsModel;
 	}
 
 	function __invoke($request, $response, $args)
 	{
-		$args['toDos'] = $this->toDosModel->getToDos();
+		$args['toDosTasks'] = $this->toDosTasksModel->getToDosTasks();
+		$args['toDosLists'] = $this->toDosListsModel->getToDosLists();
 		$this->renderer->render($response, 'index.phtml', $args);
 	}
 }

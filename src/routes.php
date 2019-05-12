@@ -8,8 +8,12 @@ return function (App $app) {
     $container = $app->getContainer();
 
     $app->get('/', 'ToDosController');
-	$app->get('/addToDo', 'AddToDoController');
-	$app->post('/addToDo', 'AddToDoController');
-	$app->post('/completeToDo', 'CompleteToDoController');
-	$app->post('/deleteToDo', 'DeleteToDoController');
+
+
+
+	$app->post('/addToDo', 'AddToDoTaskController');
+	$app->post('/addToDoList', 'AddToDoListController');
+
+	$app->post('/completeToDo', 'CompleteToDoTaskController');
+	$app->post('/deleteToDo', 'DeleteToDoTaskController');
 };

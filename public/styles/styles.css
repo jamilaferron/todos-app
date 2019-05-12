@@ -1,0 +1,28 @@
+.container-fluid {
+    height: 100vh;
+}
+
+input[type="text"], textarea {
+    outline: none;
+    box-shadow:none !important;
+}
+
+.list-name {
+    height: 40px;
+}
+.active {
+    background-color: blue;
+    color: white;
+}
+
+.list-header-wrapper {
+    margin-left: 25%;
+}
+
+.list-tasks-wrapper {
+    margin-top: 60px;
+}
+
+button:focus {
+    outline: none;
+}
